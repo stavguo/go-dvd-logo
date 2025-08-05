@@ -7,10 +7,10 @@ import (
 	_ "image/png"
 	"log"
 	"math/rand/v2"
-	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/mlange-42/ark/ecs"
+	"github.com/stavguo/go-dvd-logo/assets"
 	"github.com/stavguo/go-dvd-logo/components"
 	"github.com/stavguo/go-dvd-logo/core"
 	"github.com/stavguo/go-dvd-logo/systems"
@@ -81,14 +81,8 @@ func (gs *GameScene) Enter() {
 }
 
 func (gs *GameScene) loadPNG() *ebiten.Image {
-	// Read the PNG file
-	pngData, err := os.ReadFile("assets/logo.png")
-	if err != nil {
-		log.Fatal("Failed to read PNG file:", err)
-	}
-
-	// Decode the PNG image
-	img, _, err := image.Decode(bytes.NewReader(pngData))
+	// Decode the embedded PNG image
+	img, _, err := image.Decode(bytes.NewReader(assets.LogoPNGData))
 	if err != nil {
 		log.Fatal("Failed to decode PNG:", err)
 	}

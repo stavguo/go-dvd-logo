@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"image/color"
 	"log"
-	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/text/v2"
+	"github.com/stavguo/go-dvd-logo/assets"
 )
 
 var (
@@ -16,34 +16,28 @@ var (
 	cabinRegularFontSource *text.GoTextFaceSource
 )
 
-// Loads a font from the given file path and returns a GoTextFaceSource
-func loadFontSource(fontPath string) (*text.GoTextFaceSource, error) {
-	fontData, err := os.ReadFile(fontPath)
-	if err != nil {
-		return nil, err
-	}
-
+// loadFontSourceFromBytes creates a GoTextFaceSource from embedded font data
+func loadFontSourceFromBytes(fontData []byte) (*text.GoTextFaceSource, error) {
 	source, err := text.NewGoTextFaceSource(bytes.NewReader(fontData))
 	if err != nil {
 		return nil, err
 	}
-
 	return source, nil
 }
 
 func init() {
 	var err error
 
-	// Load Cabin-Bold font
-	cabinBoldFontSource, err = loadFontSource("assets/Cabin-Bold.ttf")
+	// Load Cabin-Bold font from embedded data
+	cabinBoldFontSource, err = loadFontSourceFromBytes(assets.CabinBoldFontData)
 	if err != nil {
-		log.Fatal("Failed to load Cabin-Bold.ttf:", err)
+		log.Fatal("Failed to load Cabin-Bold font:", err)
 	}
 
-	// Load Cabin-Regular font
-	cabinRegularFontSource, err = loadFontSource("assets/Cabin-Regular.ttf")
+	// Load Cabin-Regular font from embedded data
+	cabinRegularFontSource, err = loadFontSourceFromBytes(assets.CabinRegularFontData)
 	if err != nil {
-		log.Fatal("Failed to load Cabin-Regular.ttf:", err)
+		log.Fatal("Failed to load Cabin-Regular font:", err)
 	}
 }
 

@@ -33,6 +33,9 @@ func main() {
 	titleScene := scenes.NewTitleScene(sceneManager)
 	sceneManager.SetScene(titleScene)
 
+	// gameScene := NewGameScene()
+	// sceneManager.SetScene(gameScene)
+
 	game := &Game{sceneManager: sceneManager}
 
 	ebiten.SetWindowSize(screenWidth, screenHeight)
