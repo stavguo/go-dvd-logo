@@ -1,8 +1,82 @@
 <!DOCTYPE html>
-<script src="wasm_exec.js"></script>
-<script>
-const go = new Go();
-WebAssembly.instantiateStreaming(fetch("go-dvd-logo.wasm"), go.importObject).then(result => {
-    go.run(result.instance);
-});
-</script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>go-dvd-logo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+
+        .crt-container {
+            background: #333;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow:
+                0 0 30px rgba(0, 0, 0, 0.8),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+            border: 3px solid #444;
+        }
+
+        .screen-bezel {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        iframe {
+            width: 640px;
+            height: 480px;
+            border: 2px solid #111;
+            border-radius: 4px;
+            box-shadow:
+                0 0 20px rgba(0, 255, 0, 0.1),
+                inset 0 0 10px rgba(0, 0, 0, 0.3);
+            display: block;
+        }
+
+        .crt-label {
+            color: #666;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        .crt-label a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .crt-label a:hover {
+            color: #aaa;
+            text-shadow: 0 0 5px rgba(170, 170, 170, 0.5);
+        }
+
+        .crt-label a:visited {
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="crt-container">
+        <div class="screen-bezel">
+            <iframe src="game.html" frameborder="0" scrolling="no"></iframe>
+            <div class="crt-label"><a href="https://github.com/stavguo/go-dvd-logo">go-dvd-logo</a></div>
+        </div>
+    </div>
+</body>
+
+</html>
